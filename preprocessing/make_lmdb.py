@@ -43,8 +43,8 @@ with open(label_file, 'r') as file:
             txn_valid.put(b'label-%09d' % valid_id, str(label).encode())
             valid_id += 1
     
-    txn_train.put(b'num-samples', str(num_of_trainset).encode())
-    txn_valid.put(b'num-samples', str(num_of_validset).encode())
+    txn_train.put(b'num-samples', str(num_of_trainset-1).encode())
+    txn_valid.put(b'num-samples', str(num_of_validset-1).encode())
 
 txn_train.commit()
 txn_valid.commit()
