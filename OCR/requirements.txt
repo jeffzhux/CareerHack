@@ -1,0 +1,14 @@
+requests
+lmdb
+numpy
+Pillow
+opencv-python
+torch
+tqdm
+six
+natsort
+torchvision
+nltk
+tensorboard
+
+

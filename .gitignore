@@ -1,0 +1,7 @@
+.venv
+OCR/data/train/
+OCR/data/valid/
+
+preprocessing/data/
+saved_models
+*__pycache__
