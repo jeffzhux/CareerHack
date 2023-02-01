@@ -23,6 +23,8 @@ with open(label_file, 'r') as file:
 with open(label_file, 'r') as file:
 
     csvreader = csv.reader(file)
+    train_id = 0
+    valid_id = 0
     for idx, row in enumerate(csvreader):
         if idx == 0:
             # skip first line
@@ -32,14 +34,14 @@ with open(label_file, 'r') as file:
 
         img = cv2.imread(f'{root_path}/license-plate/{file_name}')
         if idx <= num_of_trainset:
-            if idx == 151:
-                print(idx)
-                print(b'label-%09d' % idx, str(label).encode())
-            txn_train.put(b'image-%09d' % idx, img2byte(img))
-            txn_train.put(b'label-%09d' % idx, str(label).encode())
+
+            txn_train.put(b'image-%09d' % train_id, img2byte(img))
+            txn_train.put(b'label-%09d' % train_id, str(label).encode())
+            train_id += 1
         else:
-            txn_valid.put(b'image-%09d' % idx, img2byte(img))
-            txn_valid.put(b'label-%09d' % idx, str(label).encode())
+            txn_valid.put(b'image-%09d' % valid_id, img2byte(img))
+            txn_valid.put(b'label-%09d' % valid_id, str(label).encode())
+            valid_id += 1
     
     txn_train.put(b'num-samples', str(num_of_trainset).encode())
     txn_valid.put(b'num-samples', str(num_of_validset).encode())
