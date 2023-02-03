@@ -23,8 +23,8 @@ with open(label_file, 'r') as file:
 with open(label_file, 'r') as file:
 
     csvreader = csv.reader(file)
-    train_id = 0
-    valid_id = 0
+    train_id = 1
+    valid_id = 1
     for idx, row in enumerate(csvreader):
         if idx == 0:
             # skip first line
@@ -43,8 +43,8 @@ with open(label_file, 'r') as file:
             txn_valid.put(b'label-%09d' % valid_id, str(label).encode())
             valid_id += 1
     
-    txn_train.put(b'num-samples', str(num_of_trainset-1).encode())
-    txn_valid.put(b'num-samples', str(num_of_validset-1).encode())
+    txn_train.put(b'num-samples', str(num_of_trainset).encode())
+    txn_valid.put(b'num-samples', str(num_of_validset).encode())
 
 txn_train.commit()
 txn_valid.commit()
