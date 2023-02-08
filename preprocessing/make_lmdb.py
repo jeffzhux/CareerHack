@@ -7,7 +7,7 @@ def img2byte(img):
     return img_arr.tobytes()
 
 root_path = './preprocessing/data'
-label_file = f'{root_path}/license-plate.csv'
+label_file = f'{root_path}/answer.csv'
 
 env_train = lmdb.open('./OCR/data/train')
 env_valid = lmdb.open('./OCR/data/valid')
@@ -32,7 +32,7 @@ with open(label_file, 'r') as file:
         file_name = row[0]
         label = row[1]
 
-        img = cv2.imread(f'{root_path}/license-plate/{file_name}')
+        img = cv2.imread(f'{root_path}/image/{file_name}')
         if idx <= num_of_trainset:
 
             txn_train.put(b'image-%09d' % train_id, img2byte(img))
